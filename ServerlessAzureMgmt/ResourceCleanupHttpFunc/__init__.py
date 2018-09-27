@@ -32,6 +32,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             expDate = datetime.datetime.strptime(rg.tags['ExpirationDate'], '%Y-%m-%d')
             if (expDate < datetime.datetime.today()) :
                 logging.info("ResourceCleanupFunction: Cleanup time for  {} ".format(rg.name))
+                #uncomment the following two commands if you wish to ACTUALLY delete the resource group
+                #delete_async_operation = client.resource_groups.delete(rg.name)
+                #delete_async_operation.wait()
 
     return func.HttpResponse(f"ResourceCleanupFunction - Completed")
             
